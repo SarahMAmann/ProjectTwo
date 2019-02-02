@@ -3,8 +3,8 @@ var db = require("../models");
 module.exports = function(app) {
   // Get all examples
   app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExample) {
-      res.json(dbExample);
+    db.Example.findAll({}).then(function(dbExamples) {
+      res.json(dbExamples);
     });
   });
 
@@ -17,6 +17,7 @@ module.exports = function(app) {
 
   // Delete an example by id
   app.delete("/api/examples/:id", function(req, res) {
+    // eslint-disable-next-line prettier/prettier
     db.Example.destroy({ where: { id: req.params.id } }).then(function(dbExample) {
       res.json(dbExample);
     });
