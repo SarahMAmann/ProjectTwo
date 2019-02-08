@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "#password",
-    "database": "exampledb",
+    "password": "aphelion9",
+    "database": "bands_overload",
     "host": "localhost",
     "dialect": "mysql"
   },
