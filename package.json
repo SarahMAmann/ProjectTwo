@@ -7,11 +7,13 @@
     "test": "test"
   },
   "dependencies": {
+    "chai": "^4.2.0",
     "dotenv": "^6.2.0",
     "eslint": "^5.13.0",
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-prettier": "^3.0.1",
     "express": "^4.16.4",
+    "mocha": "^5.2.0",
     "mysql2": "^1.6.4",
     "node-spotify-api": "^1.0.7",
     "path": "^0.12.7",

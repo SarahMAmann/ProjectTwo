@@ -24,7 +24,7 @@ app.use(express.static("public"));
 // Routes
 require("./controllers/author-api-routes")(app);
 require("./controllers/htmlRoutes")(app);
-require("./controllers/review-api-routes") (app);
+require("./controllers/review-api-routes")(app);
 
 var syncOptions = { force: false };
 
