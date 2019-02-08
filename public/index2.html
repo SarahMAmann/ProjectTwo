@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+        crossorigin="anonymous">
+    
+    <title>Music Review Site</title>
+</head>
+
+<body>
+
+    <!--HEADER BEGINS HERE-->
+    <header>
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-4">Bands Overload!</h1>
+                <p class="lead">This is a music review blog</p>
+            </div>
+        </div>
+
+        <!--NAVBAR BEGINS HERE-->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/blog">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            Login
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">User 1</a>
+                            <a class="dropdown-item" href="#">User 2</a>
+                            <a class="dropdown-item" href="#">User 3</a>
+                            <a class="dropdown-item" href="#">User 4</a>
+                        </div>
+                    </li>
+            </div>
+        </nav>
+    </header>
+
+    <!--MAIN BODY OF BLOG-->
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <!--FORM BEGINS HERE-->
+            <form id="cms">
+
+                <h4>SPOTIFY || Artist/Song Search</h4>
+                <!--BEGIN SPOTIFY API SEARCH FORM HERE-->
+                <!--Yes this is a form within a form. So we can GET the API search results-->
+                <form id="spotify-search-form">
+                    <div class="form-row">
+
+                        <!--SPOTIFY API SEARCH for Artist/Band-->
+                        <div class="form-group col-md-6">
+                            <label for="band-name">Band/Artist:</label>
+                            <input placeholder="Ex: 'Lionel Ritchie', 'Megadeth'" type="text" class="form-control" id="band-name">
+                        </div>
+
+                        <!--SPOTIFY API SEARCH FOR SONG TITLE-->
+                        <div class="form-group col-md-6">
+                            <label for="song-title">Song:</label>
+                            <input placeholder="Ex: 'Stairway to Heaven'" type="text" class="form-control" id="song-title">
+                        </div>
+                    </div>
+
+                    <!--BEGIN SPOTIFY SEARCH BUTTON -->
+                    <div class="form-row">
+                        <button type="search" class="btn btn-success">Search!</button>
+                    </div>
+                </form>
+                
+                <h4>Write a Review!</h4>
+                <!--BEGIN THE REST OF THE FORM HERE-->
+                <div class="form-row">
+
+                    <!--INPUT Review Title-->
+                    <div class="form-group col-md-6">
+                        <label for="review-title">Title:</label>
+                        <input placeholder="Post Title" type="text" class="form-control" id="review-title">
+                    </div>
+
+                    <!--INPUT Review Genre-->
+                    <div class="form-group col-md-6">
+                        <label for="genre">Genre:</label>
+                        <input placeholder="Ex: pop, metal, jazz, etc." type="text" class="form-control" id="genre">
+                    </div>
+
+                </div>
+                
+                <!--INPUT Review Body-->
+                <div class="form-row">
+                    <label for="body">Body:</label>
+                    <textarea placeholder="Write your review here!" class="form-control" rows="10" id="review-body"></textarea>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+
+
+
+    <!--All necessary scripts, including JQuery and cms.js-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
