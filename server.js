@@ -22,7 +22,6 @@ app.use(express.static("public"));
 // app.set("view engine", "handlebars");
 
 // Routes
-require("./controllers/author-api-routes")(app);
 require("./controllers/htmlRoutes")(app);
 require("./controllers/review-api-routes")(app);
 
