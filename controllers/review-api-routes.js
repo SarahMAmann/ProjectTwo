@@ -39,27 +39,28 @@ module.exports = function(app) {
 
   // GET route for all existing Reviews
   app.get("/api/reviews", function(req, res) {
-    var query = {};
-    if (req.query.author_id) {
-      query.AuthorId = req.query.author_id;
-    }
-    // An "include" property here allows us to join to db.Author
+    db.Review.findAll({}).then(function(dbReview) {
+      res.json(dbReview);
+    });
+  });
+
+  // GET route for returning posts based on genre
+  app.get("/api/reviews/genre/:genre", function(req, res) {
     db.Review.findAll({
-      where: query,
-      include: [db.Author]
+      where: {
+        genre: req.params.genre
+      }
     }).then(function(dbReview) {
       res.json(dbReview);
     });
   });
 
-  // GET route for retrieving a single Review
-  // "Include" property allows us to join to db.Author
-  app.get("api/reviews/:id", function(req, res) {
+  // GET route for retrieving a single post
+  app.get("/api/reviews/:id", function(req, res) {
     db.Review.findOne({
       where: {
         id: req.params.id
-      },
-      include: [db.Author]
+      }
     }).then(function(dbReview) {
       res.json(dbReview);
     });
@@ -73,7 +74,7 @@ module.exports = function(app) {
   });
 
   // DELETE route for deleting posts
-  app.delete("api/reviews/:id", function(req, res) {
+  app.delete("/api/reviews/:id", function(req, res) {
     db.Review.destroy({
       where: {
         id: req.params.id

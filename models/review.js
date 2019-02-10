@@ -40,20 +40,14 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       len: [1]
+    },
+
+    author: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [1]
     }
   });
-
-  // Associate this REVIEW table with AUTHOR table.
-  // This ensures that a Review belongs to an Author.
-  // Cannot proceed without Author due to foreign key constraint.
-
-  Review.associate = function(models) {
-    Review.belongsTo(models.Author, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  };
 
   // Completed REVIEW object returned.
   return Review;
