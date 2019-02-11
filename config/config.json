@@ -1,7 +1,7 @@
 {
   "development": {
-    "username": "root",
-    "password": "aphelion9",
+    "username": "ryanminor",
+    "password": "limabean13",
     "database": "bands_overload",
     "host": "localhost",
     "dialect": "mysql"
