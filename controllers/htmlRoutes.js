@@ -28,4 +28,9 @@ module.exports = function(app) {
   app.get("/about", function(req, res) {
     res.sendFile(path.join(__dirname, "../public/about.html"));
   });
+
+   // About Page for the creators (us!) route
+   app.get("/signup", function(req, res) {
+    res.sendFile(path.join(__dirname, "../public/signup.html"));
+  });
 };

@@ -4,7 +4,7 @@ var db = require("../models");
 
 // Dependencies for the keys required for spotify
 var keys = require("./keys");
-
+ 
 // Create Spotify/spotify objects
 var Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
@@ -15,8 +15,10 @@ var spotify = new Spotify(keys.spotify);
 
 // Routes to be exported
 module.exports = function(app) {
-  app.get("/api/spotify", function(req, res) {
-    spotify.search({ type: "track", query: "Imagine" }, function(err, data) {
+  app.get("/api/spotify/:bandname/:song", function(req, res) {
+
+    console.log("song:"+req.params.song+" "+"band:"+ req.params.bandname);
+    spotify.search({ type: "track", query: req.params.song }, function(err, data) {
       if (err) {
         return console.log("Error occurred: " + err);
       }
@@ -32,8 +34,8 @@ module.exports = function(app) {
       console.log(
         "----------------------------------------------------------------"
       );
-      console.log(data.tracks);
-      res.json(data.tracks);
+      console.log(data);
+      res.json(data);
     });
   });
 
@@ -69,6 +71,8 @@ module.exports = function(app) {
   // POST route for creating and saving a new Review
   app.post("/api/reviews", function(req, res) {
     db.Review.create(req.body).then(function(dbReview) {
+
+      console.log(req.body);
       res.json(dbReview);
     });
   });

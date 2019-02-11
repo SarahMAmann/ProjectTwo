@@ -1,7 +1,32 @@
-$(document).ready(function() {
+$(document).ready(function () {
   // referencing all jQuery objects
   var reviewContainer = $(".review-container");
   var reviewGenreSelect = $(".genre-container");
+
+  $("#reviewbtn").on("click", function () {
+
+    var review = {
+      title: $("#review-title").val().trim(),
+      genre: $("#genre").val().trim(),
+      artist: $("#artist").val().trim(),
+      song: $("#song").val().trim(),
+      author: $("#author").val().trim(),
+      body: $("#review-body").val().trim()
+    }
+
+    //alert(review.title +" "+  review.genre +" "+ review.body);    
+    $.post("/api/reviews", review, function (data) {
+      //window.location.href = "/blog";
+    });
+
+
+     $("#review-title").val(""); 
+     $("#genre").val(""); 
+    $("#artist").val(""); 
+      $("#song").val(""); 
+    $("#author").val(""); 
+     $("#review-body").val(""); 
+  });
 
   // Click events for edit and delete buttons
   $(document).on("click", "button.delete-review ", handleReviewDelete);
@@ -16,19 +41,19 @@ $(document).ready(function() {
     if (genreString) {
       genreString = "/genre/" + genreString;
     }
-    $.get("/api/reviews" + genreString, function(data) {
+    $.get("/api/reviews" + genreString, function (data) {
       console.log("Reviews", data);
       reviews = data;
       initializeRows();
     });
   }
-  
+
   // This function calls API to delete reviews
   function deleteReview(id) {
     $.ajax({
       method: "DELETE",
       url: "/api/reviews/" + id
-    }).then(function() {
+    }).then(function () {
       getReviews();
     });
   }
