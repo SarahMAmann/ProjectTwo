@@ -143,10 +143,10 @@ $(document).ready(function() {
     // Creating edit and delete buttons
     var editButton = $("<button>");
     editButton.text("EDIT");
-    editButton.addClass("edit btn btn-default");
+    editButton.addClass("edit-button btn btn-default");
     var deleteButton = $("<button>");
     deleteButton.text("x");
-    deleteButton.addClass("delete btn btn-danger");
+    deleteButton.addClass("delete-review btn btn-danger");
     // // Create the main review body DIV
     var newReviewCardBody = $("<div>");
     newReviewCardBody.addClass("card-content");
@@ -166,8 +166,8 @@ $(document).ready(function() {
     newReviewCardBody.append(newReviewArtistAndSongTitle);
     newReviewCardBody.append(newReviewBody);
     newReviewCardBody.append(newReviewGenreAndAuthor);
-    newReviewCardBody.append(editButton);
     newReviewCardBody.append(deleteButton);
+    newReviewCardBody.append(editButton);
     // // Append everything needed for the entire newReviewCard DIV to display.
     newReviewCard.append(newReviewCardImgCard);
     newReviewCard.append(newReviewCardBody);
