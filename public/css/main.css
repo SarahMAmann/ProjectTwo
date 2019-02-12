@@ -1,0 +1,10 @@
+.row-1,
+.row-2,
+.row-3 {
+    opacity:0;
+}
+
+h1 {
+    font-family:Futura;
+    color:orange;
+  }
