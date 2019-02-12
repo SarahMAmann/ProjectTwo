@@ -2,439 +2,393 @@
 <html>
 
 <head>
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
-  <link type="text/css" rel="stylesheet" href="/css/main.css" />
-  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bands Overload!</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="/css/main.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bands Overload!</title>
 </head>
 
 <body>
-        <script>
-                // to access the FB SDK, script tag has to go at the beginning of the body according to the documentation
-                window.fbAsyncInit = function () {
-                  FB.init({
-                    // our app id
-                    appId: "2361577430742579",
-                    cookie: true,
-                    xfbml: true,
-                    // the current version
-                    version: "v3.2"
-                  });
-                //   to access login statuses
-                  FB.getLoginStatus(function (response) {
-                    statusChangeCallback(response);
-                  });
-                };
-                // the sdk
-                (function (d, s, id) {
-                  var js, fjs = d.getElementsByTagName(s)[0];
-                  if (d.getElementById(id)) { return; }
-                  js = d.createElement(s); js.id = id;
-                  js.src = "https://connect.facebook.net/en_US/sdk.js";
-                  fjs.parentNode.insertBefore(js, fjs);
-                }(document, 'script', 'facebook-jssdk'));
-            
-                // this function checks to see if a user is logged in or not
-                function statusChangeCallback(response) {
-                  if (response.status === "connected") {
-                    //  if logged in do the following
-                    console.log("logged in and authenticated");
-                    $("#blog").show();
-                    $("#logout-btn").show();
-                    $("#login-btn").hide();
-                  } else {
-                    // if logged out do the following
-                    console.log("not authenticated");
-                    $("#blog").hide();
-                    $("#logout-btn").hide();
-                    // $("login-btn").show();
-                  }
-                };
-                // checks the login status
-                function checkLoginState() {
-                  FB.getLoginStatus(function (response) {
-                    statusChangeCallback(response);
-                  });
-                };
-                
-                // logout function
-                function logout() {
-                  FB.logout(function () {
-                    // what to do if the user is logged out
-                    $("#blog").hide();
-                    $("login-btn").show();
-                    $("#logout-btn").hide();
-                    // refreshes the window
-                    window.location.reload()
-                  })
-                };
-              </script>
+    <!-- script to login/logout of app -->
+    <script src="js/fblogin.js"></script>
 
-  <div class="navbar-fixed">
-    <nav class="teal">
-      <div class="container">
-        <div class="nav-wrapper">
-          <a href="#home" class="brand-logo">Bands Overload!</a>
-          <a href="#" data-activates="mobile-nav" class="button-collapse">
-            <i class="material-icons">menu</i>
-          </a>
-          <ul class="right hide-on-med-and-down">
-            <li>
-              <a class="active-link" href="/">Home</a>
-            </li>
-            <li>
-              <a class="active-link" href="/about">About</a>
-            </li>
-            <li>
-              <a class="active-link" href="/">Blog</a>
-            </li>
-            <li>
-              <a class="active-link" href="/cms">Post A Review</a>
-            </li>
-          </ul>
-        </div>
-      </div>
+    <div class="navbar-fixed">
+        <nav class="teal">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="#home" class="brand-logo">Bands Overload!</a>
+                    <a href="#" data-activates="mobile-nav" class="button-collapse">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a class="active-link" href="/">Home</a>
+                        </li>
+                        <li>
+                            <a class="active-link" href="/about">About</a>
+                        </li>
+                        <li>
+                            <a class="login-hide" class="active-link" href="/">Blog</a>
+                        </li>
+                        <li>
+                            <a class="login-hide" class="active-link" href="/cms">Post A Review</a>
+                        </li>
+                        <li>
+                            <fb:login-button id="login-btn" scope="public_profile,email" onlogin="checkLoginState();">
+                            </fb:login-button>
+                        </li>
+                        <li>
+                            <a id="logout-btn" href="#" onclick="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-      <fb:login-button id="login-btn"scope="public_profile,email" onlogin="checkLoginState();">
-        </fb:login-button>
+            <!-- <button id="logout-btn" href="#" onclick="logout()">Logout</button> -->
 
-  <button id="logout-btn" href="#" onclick="logout()">Logout</button>
-
-    </nav>
-  </div>
-  <ul class="side-nav" id="mobile-nav">
-    <li>
-      <a href="/">Home</a>
-    </li>
-    <li>
-      <a href="/about">About</a>
-    </li>
-    <li>
-      <a href="/">Blog</a>
-    </li>
-    <li>
-      <a href="/cms">Post A Review</a>
-    </li>
-  </ul>
-
-  <!-- Section: Slider -->
-  <section class="slider">
-    <ul class="slides">
-      <li>
-        <img src="/img/slider1.jpg" alt="">
-        <div class="caption center-align">
-          <h1>Bands Overload - Discover & Share New Music!</h1>
-        </div>
-      </li>
-      <li>
-        <img src="/img/slider2.jpg" alt="">
-        <div class="caption left-align">
-          <h1>Pop</h1>
-        </div>
-      </li>
-      <li>
-        <img src="/img/slider3.jpg" alt="">
-        <div class="caption right-align">
-          <h1>R&B</h1>
-        </div>
-      </li>
-      <li>
-        <img src="/img/slider4.jpg" alt="">
-        <div class="caption left-align">
-          <h1>HipHop</h1>
-        </div>
-      </li>
-      <li>
-        <img src="/img/slider5.jpg" alt="">
-        <div class="caption left-align">
-          <h1>Metal</h1>
-        </div>
-      </li>
-
+        </nav>
+    </div>
+    <ul class="side-nav" id="mobile-nav">
+        <li>
+            <a href="/">Home</a>
+        </li>
+        <li>
+            <a href="/about">About</a>
+        </li>
+        <li>
+            <a href="/">Blog</a>
+        </li>
+        <li>
+            <a href="/cms">Post A Review</a>
+        </li>
     </ul>
-  </section>
-  <!-- Section: Spotitfy and Blog-->
-  <section class="section section-blog black-lighten-3">
-    <div class="container">
-      <div class="row">
-        <h4 class="center"><span class="teal-text">Latest Blog</span></h4>
-        <div class="col s12 m6">
-          <div class="card">
-            <div class="card-image">
-              <img src="/img/Lee Fields.jpg" alt="Lee Fields">
-              <span class="card-title">Lee Fields</span>
-            </div>
-            <div class="card-content">
-              <p>Fields music can be found on various movies, TV shows and video games.</p>
-              <a href="#" class="btn btn-small grey lighten-2">Read more</a>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-image">
-              <img src="/img/Jamila-Woods.jpg" alt="Jamila Woods">
-              <span class="card-title">Jamila Woods</span>
-            </div>
-            <div class="card-content">
-              <p>Jamila Woods is a Chicago-based American soul singer, songwriter and poet.</p>
-              <a href="#" class="btn btn-small grey lighten-2">Read more</a>
-            </div>
-          </div>
+
+    <!-- Section: Slider -->
+    <section class="slider">
+        <ul class="slides">
+            <li>
+                <img src="/img/slider1.jpg" alt="">
+                <div class="caption center-align">
+                    <h1>Bands Overload - Discover & Share New Music!</h1>
+                </div>
+            </li>
+            <li>
+                <img src="/img/slider2.jpg" alt="">
+                <div class="caption left-align">
+                    <h1>Pop</h1>
+                </div>
+            </li>
+            <li>
+                <img src="/img/slider3.jpg" alt="">
+                <div class="caption right-align">
+                    <h1>R&B</h1>
+                </div>
+            </li>
+            <li>
+                <img src="/img/slider4.jpg" alt="">
+                <div class="caption left-align">
+                    <h1>HipHop</h1>
+                </div>
+            </li>
+            <li>
+                <img src="/img/slider5.jpg" alt="">
+                <div class="caption left-align">
+                    <h1>Metal</h1>
+                </div>
+            </li>
+
+        </ul>
+    </section>
+    <!-- Section: Spotitfy and Blog-->
+    <section id="blog" class="section section-blog black-lighten-3">
+        <div class="container">
+            <div class="row">
+                <h4 class="center"><span class="teal-text">Latest Blog</span></h4>
+                <div class="col s12 m6">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="/img/Lee Fields.jpg" alt="Lee Fields">
+                            <span class="card-title">Lee Fields</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Fields music can be found on various movies, TV shows and video games.</p>
+                            <a href="#" class="btn btn-small grey lighten-2">Read more</a>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="/img/Jamila-Woods.jpg" alt="Jamila Woods">
+                            <span class="card-title">Jamila Woods</span>
+                        </div>
+                        <div class="card-content">
+                            <p>Jamila Woods is a Chicago-based American soul singer, songwriter and poet.</p>
+                            <a href="#" class="btn btn-small grey lighten-2">Read more</a>
+                        </div>
+                    </div>
 
 
+                </div>
+                <div class="col s12 m6">
+                    <div class=" card-panel grey lighten-3 black-text center">
+                        <i class="material-icons medium">SPOTIFY</i>
+                        <h5>Search for Song or Artist</h5>
+                        <!--FORM BEGINS HERE-->
+                        <form id="cms">
+                            <!--BEGIN SPOTIFY API SEARCH FORM HERE-->
+                            <!--Yes this is a form within a form. So we can GET the API search results-->
+                            <form id="spotify-search-form" method="GET">
+                                <div class="form-row">
+
+                                    <!--SPOTIFY API SEARCH for Artist/Band-->
+                                    <div class="form-group col-md-6">
+                                        <label for="band-name">Band/Artist:</label>
+                                        <input placeholder="Ex: 'Lionel Ritchie', 'Megadeth'" type="text" class="form-control"
+                                            id="band-name">
+                                    </div>
+
+                                    <!--SPOTIFY API SEARCH FOR SONG TITLE-->
+                                    <div class="form-group col-md-6">
+                                        <label for="song-title">Song:</label>
+                                        <input placeholder="Ex: 'Stairway to Heaven'" type="text" class="form-control"
+                                            id="song-title">
+                                    </div>
+                                </div>
+
+                                <!--BEGIN SPOTIFY SEARCH BUTTON -->
+                                <div class="form-row">
+                                    <button id="searchbtn" class="btn btn-success">Search</button>
+                                </div>
+
+
+                                <div id="spotifyresults"></div>
+                            </form>
+
+
+
+                            <h4>Write a Review!</h4>
+                            <!--BEGIN THE REST OF THE FORM HERE-->
+                            <div class="form-row" method="Post">
+
+                                <!--INPUT Review Title-->
+                                <div class="form-group col-md-6">
+                                    <label for="review-title">Title:</label>
+                                    <input placeholder="Post Title" type="text" class="form-control" id="review-title">
+                                </div>
+
+                                <!--INPUT Review Genre-->
+                                <div class="form-group col-md-6">
+                                    <label for="genre">Genre:</label>
+                                    <input placeholder="Ex: pop, metal, jazz, etc." type="text" class="form-control" id="genre">
+                                </div>
+                                <!--INPUT Review Artist-->
+                                <div class="form-group col-md-6">
+                                    <label for="genre">Artist:</label>
+                                    <input placeholder="Ex: Eric Clapton, Beatles, Eagles, etc." type="text" class="form-control"
+                                        id="artist">
+                                </div>
+                                <!--INPUT Review Song-->
+                                <div class="form-group col-md-6">
+                                    <label for="genre">Song:</label>
+                                    <input placeholder="Ex: pop, metal, jazz, etc." type="text" class="form-control" id="song">
+                                </div>
+                                <!--INPUT Review Author-->
+                                <div class="form-group col-md-6">
+                                    <label for="genre">Author:</label>
+                                    <input placeholder="Ex: pop, metal, jazz, etc." type="text" class="form-control" id="author">
+                                </div>
+                            </div>
+                            <!--INPUT Image for your Blog Review-->
+                            <div class="form-group col-md-6">
+                                <label for="image-url">Image for Your Review (URL)</label>
+                                <input placeholder="So your review has visual appeal!" type="text" class="form-control"
+                                    id="image-url">
+                            </div>
+                            <!--INPUT Review Body-->
+                            <div class="form-row">
+                                <label for="body">Body:</label>
+                                <textarea placeholder="Write your review here!" class="form-control" rows="10" id="review-body"></textarea>
+                                <!-- Post A Review BUTTON -->
+                                <div class="form-row">
+                                    <button id="reviewbtn" class="btn btn-success">Post A Review!</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+    </section>
+    <!-- End Of Spotify and Blog-->
+    <!-- Divider-->
+    <section class="section section-follow grey darken-2 white-text center">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h4> Follow us on social media</h4>
+                    <a href="https://facebook.com" target="_blank" class="white-text"></a>
+                    <i class="fab fa-facebook fa-2x"></i>
+                    <a href="https://twitter.com" target="_blank" class="white-text"></a>
+                    <i class="fab fa-twitter fa-2x"></i>
+                    <a href="https://linkedin.com" target="_blank" class="white-text"></a>
+                    <i class="fab fa-linkedin fa-2x"></i>
+                    <a href="https://googleplus.com" target="_blank" class="white-text"></a>
+                    <i class="fab fa-google-plus fa-2x"></i>
+                    <a href="https://pinterest.com" target="_blank" class="white-text"></a>
+                    <i class="fab fa-pinterest fa-2x"></i>
+
+
+                </div>
+            </div>
         </div>
-        <div class="col s12 m6">
-          <div class=" card-panel grey lighten-3 black-text center">
-            <i class="material-icons medium">SPOTIFY</i>
-            <h5>Search for Song or Artist</h5>
-            <!--FORM BEGINS HERE-->
-            <form id="cms">
-              <!--BEGIN SPOTIFY API SEARCH FORM HERE-->
-              <!--Yes this is a form within a form. So we can GET the API search results-->
-              <form id="spotify-search-form" method="GET">
-                <div class="form-row">
+    </section>
+    <!-- End of divider-->
+    <!-- Section: Music Reviews-->
+    <section class="section section-popular">
 
-                  <!--SPOTIFY API SEARCH for Artist/Band-->
-                  <div class="form-group col-md-6">
-                    <label for="band-name">Band/Artist:</label>
-                    <input placeholder="Ex: 'Lionel Ritchie', 'Megadeth'" type="text" class="form-control"
-                      id="band-name">
-                  </div>
+        <!--The following are blog post placeholders to bulk up our content.-->
+        <div class="container">
+            <div class="row">
+                <h4 class="center"><span class="teal-text">Read All Music Reviews</h4>
+            </div>
 
-                  <!--SPOTIFY API SEARCH FOR SONG TITLE-->
-                  <div class="form-group col-md-6">
-                    <label for="song-title">Song:</label>
-                    <input placeholder="Ex: 'Stairway to Heaven'" type="text" class="form-control" id="song-title">
-                  </div>
+            <!--The new blog posts should go here-->
+            <div class="container" id="review-container">
+
+            </div>
+
+            <div class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/img/album1.jpg" alt="">
+                        <span class="card-title">Kacey Musgraves Wins Album of the Year</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Kacey Musgraves has won Album of the Year at the 2019 Grammys. Golden Hour takes home the
+                            honor, beating
+                            out albums by Drake (Scorpion), Post Malone (beerbongs & bentleys), Cardi B (Invasion of
+                            Privacy), Janelle
+                            Monáe (Dirty Computer), H.E.R. (H.E.R.), and Brandi Carlile (By the Way, I Forgive You), as
+                            well as Black
+                            Panther The Album Music From and Inspired By. Watch Kacey’s acceptance speech below.</p>
+                        <a href="#" class="btn btn-small grey lighten-2">Read more</a>
+                    </div>
                 </div>
 
-                <!--BEGIN SPOTIFY SEARCH BUTTON -->
-                <div class="form-row">
-                  <button id="searchbtn" class="btn btn-success">Search</button>
+            </div>
+            <div class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/img/album2.jpg" alt="">
+                        <span class="card-title">All The Grammy Winners</span>
+                    </div>
+                    <div class="card-content">
+                        <p>Tonight, the 61st Annual Grammy Awards took place at Los Angeles’ STAPLES Center with host
+                            Alicia Keys.
+                            Here is the full list of winners. Kendrick Lamar, Drake, Cardi B, and Childish Gambino lead
+                            this year’s
+                            nominations. Kendrick garnered the most nods with eight in total. Drake had the second-most
+                            nominations
+                            with seven.</p>
+                        <a href="#" class="btn btn-small grey lighten-2">Read more</a>
+                    </div>
                 </div>
 
-
-                <div id="spotifyresults"></div>
-              </form>
-
-
-
-              <h4>Write a Review!</h4>
-              <!--BEGIN THE REST OF THE FORM HERE-->
-              <div class="form-row" method="Post">
-
-                <!--INPUT Review Title-->
-                <div class="form-group col-md-6">
-                  <label for="review-title">Title:</label>
-                  <input placeholder="Post Title" type="text" class="form-control" id="review-title">
+            </div>
+            <div class="col s12 m4">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="/img/album3.jpg" alt="">
+                        <span class="card-title">Watch "MASSEDUCTION" Live Grammy's Performance!</span>
+                    </div>
+                    <div class="card-content">
+                        <p>St. Vincent and Dua Lipa took the stage tonight at the 61st Grammy Awards to perform
+                            together. They began
+                            with “MASSEDUCTION,” which won Best Rock Song earlier in the evening. After that, they did
+                            “One Kiss” (Dua
+                            Lipa’s collaboration with Calvin Harris). Check out the performance below.</p>
+                        <a href="#" class="btn btn-small grey lighten-2">Read more</a>
+                    </div>
                 </div>
 
-                <!--INPUT Review Genre-->
-                <div class="form-group col-md-6">
-                  <label for="genre">Genre:</label>
-                  <input placeholder="Ex: pop, metal, jazz, etc." type="text" class="form-control" id="genre">
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="section teal darken-2 white-text center">
+        <p class="flow-text"> Bands Overload! &copy; 2019</p>
+
+    </footer>
+    <!-- End of Footer-->
+
+
+    <!-- Login Modal-->
+    <div id="login-modal" class="modal">
+
+        <div class="modal-content">
+            <h4>Account Login</h4>
+            <form>
+                <div class="input-field">
+                    <input type="email" id="email">
+                    <label for="email">Email</label>
                 </div>
-                <!--INPUT Review Artist-->
-                <div class="form-group col-md-6">
-                  <label for="genre">Artist:</label>
-                  <input placeholder="Ex: Eric Clapton, Beatles, Eagles, etc." type="text" class="form-control" id="artist">
+                <div class="input-field">
+                    <input type="password" id="password">
+                    <label for="password">Password</label>
                 </div>
-                <!--INPUT Review Song-->
-                <div class="form-group col-md-6">
-                  <label for="genre">Song:</label>
-                  <input placeholder="Ex: pop, metal, jazz, etc." type="text" class="form-control" id="song">
-                </div>
-                <!--INPUT Review Author-->
-                <div class="form-group col-md-6">
-                  <label for="genre">Author:</label>
-                  <input placeholder="Ex: pop, metal, jazz, etc." type="text" class="form-control" id="author">
-                </div>
-              </div>
-              <!--INPUT Image for your Blog Review-->
-              <div class="form-group col-md-6">
-                <label for="image-url">Image for Your Review (URL)</label>
-                <input placeholder="So your review has visual appeal!" type="text" class="form-control" id="image-url">
-              </div>
-              <!--INPUT Review Body-->
-              <div class="form-row">
-                <label for="body">Body:</label>
-                <textarea placeholder="Write your review here!" class="form-control" rows="10"
-                  id="review-body"></textarea>
-                <!-- Post A Review BUTTON -->
-                <div class="form-row">
-                  <button id="reviewbtn" class="btn btn-success">Post A Review!</button>
-                </div>
-              </div>
             </form>
-          </div>
-        </div>
-      </div>
-
-  </section>
-  <!-- End Of Spotify and Blog-->
-  <!-- Divider-->
-  <section class="section section-follow grey darken-2 white-text center">
-    <div class="container">
-      <div class="row">
-        <div class="col s12">
-          <h4> Follow us on social media</h4>
-          <a href="https://facebook.com" target="_blank" class="white-text"></a>
-          <i class="fab fa-facebook fa-2x"></i>
-          <a href="https://twitter.com" target="_blank" class="white-text"></a>
-          <i class="fab fa-twitter fa-2x"></i>
-          <a href="https://linkedin.com" target="_blank" class="white-text"></a>
-          <i class="fab fa-linkedin fa-2x"></i>
-          <a href="https://googleplus.com" target="_blank" class="white-text"></a>
-          <i class="fab fa-google-plus fa-2x"></i>
-          <a href="https://pinterest.com" target="_blank" class="white-text"></a>
-          <i class="fab fa-pinterest fa-2x"></i>
-
 
         </div>
-      </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-action modal-close btn grey">
+                <i class="fa fa-sync"></i>Reset Password</a>
+            <a href="#!" class="modal-action modal-close btn green">
+                <i class="fa fa-lock"></i>Login</a>
+
+        </div>
     </div>
-  </section>
-  <!-- End of divider-->
-  <!-- Section: Music Reviews-->
-  <section class="section section-popular">
+    <!-- End of Modal-->
 
-    <!--The following are blog post placeholders to bulk up our content.-->
-    <div class="container">
-      <div class="row">
-        <h4 class="center"><span class="teal-text">Read All Music Reviews</h4>
-      </div>
-
-      <!--The new blog posts should go here-->
-      <div class="container" id="review-container">
-
-      </div>
-
-      <div class="col s12 m4">
-        <div class="card">
-          <div class="card-image">
-            <img src="/img/album1.jpg" alt="">
-            <span class="card-title">Kacey Musgraves Wins Album of the Year</span>
-          </div>
-          <div class="card-content">
-            <p>Kacey Musgraves has won Album of the Year at the 2019 Grammys. Golden Hour takes home the honor, beating
-              out albums by Drake (Scorpion), Post Malone (beerbongs & bentleys), Cardi B (Invasion of Privacy), Janelle
-              Monáe (Dirty Computer), H.E.R. (H.E.R.), and Brandi Carlile (By the Way, I Forgive You), as well as Black
-              Panther The Album Music From and Inspired By. Watch Kacey’s acceptance speech below.</p>
-            <a href="#" class="btn btn-small grey lighten-2">Read more</a>
-          </div>
-        </div>
-
-      </div>
-      <div class="col s12 m4">
-        <div class="card">
-          <div class="card-image">
-            <img src="/img/album2.jpg" alt="">
-            <span class="card-title">All The Grammy Winners</span>
-          </div>
-          <div class="card-content">
-            <p>Tonight, the 61st Annual Grammy Awards took place at Los Angeles’ STAPLES Center with host Alicia Keys.
-              Here is the full list of winners. Kendrick Lamar, Drake, Cardi B, and Childish Gambino lead this year’s
-              nominations. Kendrick garnered the most nods with eight in total. Drake had the second-most nominations
-              with seven.</p>
-            <a href="#" class="btn btn-small grey lighten-2">Read more</a>
-          </div>
-        </div>
-
-      </div>
-      <div class="col s12 m4">
-        <div class="card">
-          <div class="card-image">
-            <img src="/img/album3.jpg" alt="">
-            <span class="card-title">Watch "MASSEDUCTION" Live Grammy's Performance!</span>
-          </div>
-          <div class="card-content">
-            <p>St. Vincent and Dua Lipa took the stage tonight at the 61st Grammy Awards to perform together. They began
-              with “MASSEDUCTION,” which won Best Rock Song earlier in the evening. After that, they did “One Kiss” (Dua
-              Lipa’s collaboration with Calvin Harris). Check out the performance below.</p>
-            <a href="#" class="btn btn-small grey lighten-2">Read more</a>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- Footer -->
-  <footer class="section teal darken-2 white-text center">
-    <p class="flow-text"> Bands Overload! &copy; 2019</p>
-
-  </footer>
-  <!-- End of Footer-->
-
-
-  <!-- Login Modal-->
-  <div id="login-modal" class="modal">
-
-    <div class="modal-content">
-      <h4>Account Login</h4>
-      <form>
-        <div class="input-field">
-          <input type="email" id="email">
-          <label for="email">Email</label>
-        </div>
-        <div class="input-field">
-          <input type="password" id="password">
-          <label for="password">Password</label>
-        </div>
-      </form>
-
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close btn grey">
-        <i class="fa fa-sync"></i>Reset Password</a>
-      <a href="#!" class="modal-action modal-close btn green">
-        <i class="fa fa-lock"></i>Login</a>
-
-    </div>
-  </div>
-  <!-- End of Modal-->
-
-  <!--All necessary scripts, including JQuery and cms.js-->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-    crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
-    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-    crossorigin="anonymous"></script>
-  <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+    <!--All necessary scripts, including JQuery and cms.js-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
   crossorigin="anonymous"></script> -->
 
-  <!--Import jQuery before materialize.js-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="/js/materialize.min.js"></script>
-  <script src="/js/blog.js"></script>
-  <script src="/js/cms.js"></script>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/js/materialize.min.js"></script>
+    <script src="/js/blog.js"></script>
+    <script src="/js/cms.js"></script>
 
-  <script src="/js/spotify.js"></script>
-  <script>
-    $(document).ready(function () {
-      // Init Side nav
-      $('.button-collapse').sideNav();
+    <script src="/js/spotify.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Init Side nav
+            $('.button-collapse').sideNav();
 
-      //Init Modal
+            //Init Modal
 
-      $('.modal').modal();
+            $('.modal').modal();
 
-      //Init Slider
-      $('.slider').slider({
-        indicators: false,
-        height: 500,
-        transition: 500,
-        interval: 3000
-      });
+            //Init Slider
+            $('.slider').slider({
+                indicators: false,
+                height: 500,
+                transition: 500,
+                interval: 3000
+            });
 
-    });
-  </script>
+        });
+    </script>
 
 
 </body>

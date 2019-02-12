@@ -1,93 +1,103 @@
 <!--Post/Edit Page for BANDS OVERLOAD-->
 <!DOCTYPE html>
 <html>
-	<head>
-		<!--Import Google Icon Font-->
-		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<!--Import materialize.css-->
-		<link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
-		<link type="text/css" rel="stylesheet" href="/css/main.css" />
-		<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-		<!--Let browser know website is optimized for mobile-->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Bands Overload! | Edit Reviews</title>
-	  </head>
+
+<head>
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="/css/materialize.min.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="/css/main.css" />
+	<script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Bands Overload! | Edit Reviews</title>
+</head>
 
 <body>
+	<!-- script to login/logout of app -->
+	<script src="js/fblogin.js"></script>
+
 	<div class="navbar-fixed">
 		<nav class="teal">
-		  <div class="container">
-			<div class="nav-wrapper">
-			  <a href="/" class="brand-logo">Bands Overload!</a>
-			  <a href="#" data-activates="mobile-nav" class="button-collapse">
-				<i class="material-icons">menu</i>
-			  </a>
-			  <ul class="right hide-on-med-and-down">
-				<li>
-				  <a href="/">Home</a>
-				</li>
-				<li>
-				  <a class="active-link" href="/about">About</a>
-				</li>
-				<li>
-				  <a class="active-link" href="/">Blog</a>
-				</li>
-			   
-			  </ul>
+			<div class="container">
+				<div class="nav-wrapper">
+					<a href="/" class="brand-logo">Bands Overload!</a>
+					<a href="#" data-activates="mobile-nav" class="button-collapse">
+						<i class="material-icons">menu</i>
+					</a>
+					<ul class="right hide-on-med-and-down">
+						<li>
+							<a href="/">Home</a>
+						</li>
+						<li>
+							<a class="active-link" href="/about">About</a>
+						</li>
+						<li>
+							<a class="active-link" href="/">Blog</a>
+						</li>
+						<li>
+							<fb:login-button id="login-btn" scope="public_profile,email" onlogin="checkLoginState();">
+							</fb:login-button>
+						</li>
+						<li>
+							<a id="logout-btn" href="#" onclick="logout()">Logout</a>
+						</li>
+					</ul>
+				</div>
 			</div>
-		  </div>
 		</nav>
-	  </div>
-	  <ul class="side-nav" id="mobile-nav">
+	</div>
+	<ul class="side-nav" id="mobile-nav">
 		<li>
-		  <a href="/">Home</a>
+			<a href="/">Home</a>
 		</li>
 		<li>
-		  <a href="/about">About</a>
+			<a href="/about">About</a>
 		</li>
 		<li>
-		  <a href="/blog">Blog</a>
+			<a href="/blog">Blog</a>
 		</li>
-		
-	  </ul>
+
+	</ul>
 
 
 	<div id="main-container" class="container">
 		<section class="main-section">
-			<h1>Post a Review</h1>
+			<h1>Post a Review (must be logged in)</h1>
 
-			<form id="cms" class="review-form" method="POST">
+			<form id="cms" class="login-hide" class="review-form" method="POST">
 				<ul>
 					<!-- <form id="spotify-search"> -->
-						<li>
-							<label for ="name">Band/Artist*</label>
-							<input type="text" id="artist-name" name="artist-name" placeholder="Ex: 'Lionel Ritchie'" required="required">
-						</li>
-						<li>
-							<label for ="name">Song*</label>
-							<input type="text" id="song-title" name="song-title" placeholder="Ex: 'Wish You Were Here'" required="required">
-						</li>
-						<li>
-							<label for ="name">Genre*</label>
-							<input type="text" id="genre" name="genre" placeholder="Ex: pop, rock, jazz, etc." required="required">
-						</li>
-						<!-- <button type="submit" id="spotify-submit">Search</button>
+					<li>
+						<label for="name">Band/Artist*</label>
+						<input type="text" id="artist-name" name="artist-name" placeholder="Ex: 'Lionel Ritchie'" required="required">
+					</li>
+					<li>
+						<label for="name">Song*</label>
+						<input type="text" id="song-title" name="song-title" placeholder="Ex: 'Wish You Were Here'" required="required">
+					</li>
+					<li>
+						<label for="name">Genre*</label>
+						<input type="text" id="genre" name="genre" placeholder="Ex: pop, rock, jazz, etc." required="required">
+					</li>
+					<!-- <button type="submit" id="spotify-submit">Search</button>
 					</form> -->
 					<li>
-						<label for ="name">Title</label>
+						<label for="name">Title</label>
 						<input type="text" id="post-title" name="post-title" placeholder="Your Review Title" required="required">
 					</li>
 					<li>
-						<label for ="message">Your Review</label>
+						<label for="message">Your Review</label>
 						<textarea id="review-body" name="review-body" required="required"></textarea>
 					</li>
 					<li>
-							<label for ="author">Author Name</label>
-							<input type="text" id="author-name" name="author-name" placeholder="Your name (required)" required="required"></textarea>
+						<label for="author">Author Name</label>
+						<input type="text" id="author-name" name="author-name" placeholder="Your name (required)" required="required"></textarea>
 					</li>
 					<li>
-							<label for="image-url">Image for Your Review</label>
-							<input placeholder="URL Required" type="text" class="form-control" id="image-url">
+						<label for="image-url">Image for Your Review</label>
+						<input placeholder="URL Required" type="text" class="form-control" id="image-url">
 					</li>
 
 				</ul>
@@ -96,41 +106,42 @@
 		</section>
 
 
-  <!-- Section: Social Media-->
-  <section class="section section-follow grey darken-2 white-text center">
-	<div class="container">
-		<div class="row">
-			<div class="col s12">
-				<h4> Follow us on social media</h4>
-				<a href="https://facebook.com" target="_blank" class="white-text"></a>
-				<i class="fab fa-facebook fa-2x"></i>
-				<a href="https://twitter.com" target="_blank" class="white-text"></a>
-				<i class="fab fa-twitter fa-2x"></i>
-				<a href="https://linkedin.com" target="_blank" class="white-text"></a>
-				<i class="fab fa-linkedin fa-2x"></i>
-				<a href="https://googleplus.com" target="_blank" class="white-text"></a>
-				<i class="fab fa-google-plus fa-2x"></i>
-				<a href="https://pinterest.com" target="_blank" class="white-text"></a>
-				<i class="fab fa-pinterest fa-2x"></i>
-	
-	
+		<!-- Section: Social Media-->
+		<section class="section section-follow grey darken-2 white-text center">
+			<div class="container">
+				<div class="row">
+					<div class="col s12">
+						<h4> Follow us on social media</h4>
+						<a href="https://facebook.com" target="_blank" class="white-text"></a>
+						<i class="fab fa-facebook fa-2x"></i>
+						<a href="https://twitter.com" target="_blank" class="white-text"></a>
+						<i class="fab fa-twitter fa-2x"></i>
+						<a href="https://linkedin.com" target="_blank" class="white-text"></a>
+						<i class="fab fa-linkedin fa-2x"></i>
+						<a href="https://googleplus.com" target="_blank" class="white-text"></a>
+						<i class="fab fa-google-plus fa-2x"></i>
+						<a href="https://pinterest.com" target="_blank" class="white-text"></a>
+						<i class="fab fa-pinterest fa-2x"></i>
+
+
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-	</section>
-	
-	
-	
-	  <!-- Footer -->
-	  <footer class="section teal darken-2 white-text center">
-		<p class="flow-text"> Bands Overload! &copy; 2019</p>
-	
-	  </footer>
-	<!-- End Of Footer-->
+		</section>
 
 
-	<script src="https://code.jquery.com/jquery.js"></script>
-	<script src="/js/cms.js"></script>
-	
+
+		<!-- Footer -->
+		<footer class="section teal darken-2 white-text center">
+			<p class="flow-text"> Bands Overload! &copy; 2019</p>
+
+		</footer>
+		<!-- End Of Footer-->
+
+
+		<script src="https://code.jquery.com/jquery.js"></script>
+		<script src="/js/cms.js"></script>
+
 </body>
+
 </html>
