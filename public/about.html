@@ -2,161 +2,173 @@
 <html>
 
 <head>
-  <!--Import Google Icon Font-->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!--Import materialize.css-->
-  <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
-  <link type="text/css" rel="stylesheet" href="css/main.css" /> 
-  <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-  <!--Let browser know website is optimized for mobile-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bands Overload!</title>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
+    <link type="text/css" rel="stylesheet" href="css/main.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bands Overload!</title>
 </head>
 
 <body>
-  <div class="navbar-fixed">
-    <nav class="teal">
-      <div class="container">
-        <div class="nav-wrapper">
-          <a href="#home" class="brand-logo">Bands Overload!</a>
-          <a href="#" data-activates="mobile-nav" class="button-collapse">
-            <i class="material-icons">menu</i>
-          </a>
-          <ul class="right hide-on-med-and-down">
-            <li>
-              <a href="/">Home</a>
-            </li>
-            <li>
-              <a class="active-link" href="/about">About</a>
-            </li>
-            <li>
-              <a class="active-link" href="/">Blog</a>
-            </li>
-           
-          </ul>
-        </div>
-      </div>
-    </nav>
-  </div>
-  <ul class="side-nav" id="mobile-nav">
-    <li>
-      <a href="/">Home</a>
-    </li>
-    <li>
-      <a href="/about">About</a>
-    </li>
-    <li>
-    <a href="#login">Login</a> 
-    </li>
-    <li>
-      <a href="/blog">Blog</a>
-    </li>
+    <!-- script to login/logout of app -->
+    <script src="js/fblogin.js"></script>
     
-  </ul>
-
-  <!-- Section: Slider -->
-  <section class="slider">
-      <ul class="slides">
-          <li>
-              <img src="/img/slider1.jpg" alt="">
-              <div class="caption center-align">
-                  <h1>This is a music review blog!</h1>
-              </div>
-          </li>
-          <li>
-            <img src="/img/slider2.jpg" alt="">
-            <div class="caption left-align">
-                <h1>Pop</h1>
+    <div class="navbar-fixed">
+        <nav class="teal">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <a href="#home" class="brand-logo">Bands Overload!</a>
+                    <a href="#" data-activates="mobile-nav" class="button-collapse">
+                        <i class="material-icons">menu</i>
+                    </a>
+                    <ul class="right hide-on-med-and-down">
+                        <li>
+                            <a href="/">Home</a>
+                        </li>
+                        <li>
+                            <a class="active-link" href="/about">About</a>
+                        </li>
+                        <li>
+                            <a class="login-hide" class="active-link" href="/">Blog</a>
+                        </li>
+                        <li>
+                            <fb:login-button id="login-btn" scope="public_profile,email" onlogin="checkLoginState();">
+                            </fb:login-button>
+                        </li>
+                        <li>
+                            <a id="logout-btn" href="#" onclick="logout()">Logout</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
+        </nav>
+    </div>
+    <ul class="side-nav" id="mobile-nav">
+        <li>
+            <a href="/">Home</a>
         </li>
         <li>
-            <img src="/img/slider3.jpg" alt="">
-            <div class="caption right-align">
-                <h1>R&B</h1>
-            </div>
+            <a href="/about">About</a>
         </li>
         <li>
-            <img src="/img/slider4.jpg" alt="">
-            <div class="caption left-align">
-                <h1>HipHop</h1>
+            <a href="#login">Login</a>
+        </li>
+        <li>
+            <a href="/blog">Blog</a>
+        </li>
+
+    </ul>
+
+    <!-- Section: Slider -->
+    <section class="slider">
+        <ul class="slides">
+            <li>
+                <img src="/img/slider1.jpg" alt="">
+                <div class="caption center-align">
+                    <h1>This is a music review blog!</h1>
+                </div>
+            </li>
+            <li>
+                <img src="/img/slider2.jpg" alt="">
+                <div class="caption left-align">
+                    <h1>Pop</h1>
+                </div>
+            </li>
+            <li>
+                <img src="/img/slider3.jpg" alt="">
+                <div class="caption right-align">
+                    <h1>R&B</h1>
+                </div>
+            </li>
+            <li>
+                <img src="/img/slider4.jpg" alt="">
+                <div class="caption left-align">
+                    <h1>HipHop</h1>
+                </div>
+            </li>
+
+        </ul>
+    </section>
+    <!-- End of Slider-->
+
+    <!-- Section: About us -->
+
+    <section class="section section-about grey lighten-3 center">
+        <div class="container">
+            <h2> About Bands Overload!</h2>
+            <p class="flow-text">Getting your music heard is hard. Getting your music heard by the right people is even
+                harder. You hear so many blogs, journalists and other industry big names from bands, so it’s difficult
+                to know where to read..</p>
+            <p class="flow-text">This is why <b>Bands Overload!</b> is here. Write about your favorite music, and share
+                it with the world. Likewise, you get to discover something you otherwise would have never heard of!</p>
+            <div class="row">
+                <div class="col s12 m6">
+                    <img src="/img/people.jpg" alt="" class="responsive-img circle">
+                </div>
+                <div class="col s12 m5 offset-m1">
+                    <br>
+                    <ul class="collection with-header z-depth-4">
+                        <li class="collection-header">
+                            <h5>Meet The Team</h5>
+                        </li>
+                        <li class="collection-team">
+                            <i class="material-icons center-align"></i>Sarah
+                        </li>
+                        <li class="collection-team">
+                            <i class="material-icons center-align"></i>Jenina
+                        </li>
+                        <li class="collection-team">
+                            <i class="material-icons center-align"></i>Ryan
+                        </li>
+                        <li class="collection-team">
+                            <i class="material-icons center-align"></i>Resti
+                        </li>
+
+                    </ul>
+                </div>
             </div>
-         </li>
-        
-      </ul>
-  </section>
-<!-- End of Slider-->
-
-<!-- Section: About us -->
-
-<section class="section section-about grey lighten-3 center">
-    <div class="container">
-        <h2> About Bands Overload!</h2>
-        <p class="flow-text">Getting your music heard is hard. Getting your music heard by the right people is even harder. You hear so many blogs, journalists and other industry big names from bands, so it’s difficult to know where to read..</p>
-        <p class="flow-text">This is why <b>Bands Overload!</b> is here. Write about your favorite music, and share it with the world. Likewise, you get to discover something you otherwise would have never heard of!</p>
-        <div class="row">
-        <div class="col s12 m6">
-            <img src="/img/people.jpg" alt="" class="responsive-img circle">
         </div>
-        <div class="col s12 m5 offset-m1">
-            <br>
-            <ul class="collection with-header z-depth-4">
-                <li class="collection-header">
-                    <h5>Meet The Team</h5>
-                </li>
-                <li class="collection-team">
-                <i class="material-icons center-align"></i>Sarah
-                </li>
-                <li class="collection-team">
-                <i class="material-icons center-align"></i>Jenina
-                </li>
-                <li class="collection-team">
-                <i class="material-icons center-align"></i>Ryan
-                </li>
-                <li class="collection-team">
-                <i class="material-icons center-align"></i>Resti
-                </li>
+    </section>
 
-            </ul>
+
+    <!-- Section: Social Media-->
+    <section class="section section-follow grey darken-2 white-text center">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h4> Follow us on social media</h4>
+                    <a href="https://facebook.com" target="_blank" class="white-text"></a>
+                    <i class="fab fa-facebook fa-2x"></i>
+                    <a href="https://twitter.com" target="_blank" class="white-text"></a>
+                    <i class="fab fa-twitter fa-2x"></i>
+                    <a href="https://linkedin.com" target="_blank" class="white-text"></a>
+                    <i class="fab fa-linkedin fa-2x"></i>
+                    <a href="https://googleplus.com" target="_blank" class="white-text"></a>
+                    <i class="fab fa-google-plus fa-2x"></i>
+                    <a href="https://pinterest.com" target="_blank" class="white-text"></a>
+                    <i class="fab fa-pinterest fa-2x"></i>
+
+
+                </div>
+            </div>
         </div>
-        </div>
-    </div>
-</section>
-  
-
-  <!-- Section: Social Media-->
-<section class="section section-follow grey darken-2 white-text center">
-<div class="container">
-    <div class="row">
-        <div class="col s12">
-            <h4> Follow us on social media</h4>
-            <a href="https://facebook.com" target="_blank" class="white-text"></a>
-            <i class="fab fa-facebook fa-2x"></i>
-            <a href="https://twitter.com" target="_blank" class="white-text"></a>
-            <i class="fab fa-twitter fa-2x"></i>
-            <a href="https://linkedin.com" target="_blank" class="white-text"></a>
-            <i class="fab fa-linkedin fa-2x"></i>
-            <a href="https://googleplus.com" target="_blank" class="white-text"></a>
-            <i class="fab fa-google-plus fa-2x"></i>
-            <a href="https://pinterest.com" target="_blank" class="white-text"></a>
-            <i class="fab fa-pinterest fa-2x"></i>
-
-
-        </div>
-    </div>
-</div>
-</section>
+    </section>
 
 
 
-  <!-- Footer -->
-  <footer class="section teal darken-2 white-text center">
-    <p class="flow-text"> Bands Overload! &copy; 2019</p>
+    <!-- Footer -->
+    <footer class="section teal darken-2 white-text center">
+        <p class="flow-text"> Bands Overload! &copy; 2019</p>
 
-  </footer>
-<!-- End Of Footer-->
+    </footer>
+    <!-- End Of Footer-->
 
-<!-- Login Modal-->
-<div id="login-modal" class="modal">
+    <!-- Login Modal-->
+    <div id="login-modal" class="modal">
         <div class="modal-content">
             <h4>Account Login</h4>
             <form>
@@ -165,52 +177,52 @@
                     <label for="email">Email</label>
                 </div>
                 <div class="input-field">
-                        <input type="password" id="password">
-                        <label for="password">Password</label>
-                    </div>
+                    <input type="password" id="password">
+                    <label for="password">Password</label>
+                </div>
             </form>
-    
+
         </div>
         <div class="modal-footer">
             <a href="#!" class="modal-action modal-close btn grey">
                 <i class="fa fa-sync"></i>Reset Password</a>
             <a href="#!" class="modal-action modal-close btn green">
                 <i class="fa fa-lock"></i>Login</a>
-        
+
         </div>
     </div>
-    <!-- End of Modal-->  
-  
+    <!-- End of Modal-->
 
-  <!--All necessary scripts, including JQuery and cms.js-->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-  crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-  crossorigin="anonymous"></script>
-<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+
+    <!--All necessary scripts, including JQuery and cms.js-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
   crossorigin="anonymous"></script> -->
 
-  <!--Import jQuery before materialize.js-->
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="js/materialize.min.js"></script>
-  <script>
-    $(document).ready(function () {
-        // Init Side nav
-      $('.button-collapse').sideNav();
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Init Side nav
+            $('.button-collapse').sideNav();
 
-       //Init Modal
-       $('.modal').modal();
+            //Init Modal
+            $('.modal').modal();
 
-      //Init Slider
-      $('.slider').slider({
-          indicators: false,
-          height: 500,
-          transition: 500,
-          interval:3000
-      });
+            //Init Slider
+            $('.slider').slider({
+                indicators: false,
+                height: 500,
+                transition: 500,
+                interval: 3000
+            });
 
-    });
-  </script>
+        });
+    </script>
 </body>
 
 </html>
