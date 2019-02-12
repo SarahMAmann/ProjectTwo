@@ -8,3 +8,39 @@ h1 {
     font-family:Futura;
     color:orange;
   }
+
+  button.edit-button {
+      float: right;
+  }
+
+  button.delete-review {
+      float: right;
+  }
+
+  small {
+      font-weight: bold;
+      font-size: 14px;
+      margin: 20px auto;
+      padding: 10px auto;
+      background-color: #e0dddd;
+  }
+
+  #addReview {
+      margin: auto auto 20px auto;
+      padding: 10px;
+      border-radius: 15px;
+      border: 2px solid #366e85;
+      background-color: #4d9fc0;
+      color: #ffffff;
+      font-size: 20px;
+  }
+
+  #addReview:hover {
+    margin: auto auto 20px auto;
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px solid #855636;
+    background-color: orange;
+    color: #ffffff;
+    font-size: 20px;
+  }
