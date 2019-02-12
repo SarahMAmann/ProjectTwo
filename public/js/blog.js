@@ -1,73 +1,93 @@
-$(document).ready(function () {
+$(document).ready(function() {
   // referencing all jQuery objects
   var reviewContainer = $(".review-container");
   var reviewGenreSelect = $(".genre-container");
 
-
-  $("#searchbtn").on("click", function (event) {
+  // Initiate Spotify search functions to retrieve API data.
+  $("#searchbtn").on("click", function(event) {
+    // Prevent automatic refresh
     event.preventDefault();
 
-
-
-
-    var bandname = $("#band-name").val().trim();
-    var song = $("#song-title").val().trim();
-
-
+    var bandname = $("#band-name")
+      .val()
+      .trim();
+    var song = $("#song-title")
+      .val()
+      .trim();
 
     $.ajax({
-        method: "GET",
-        url: "/api/spotify/" + bandname + "/" + song
-    }).then(function (data) {
-        $("#spotifyresults").empty();
-        for(var i=0;i < data.tracks.items.length;i++)
-        {
-            $("#spotifyresults").append(" ");
-            $("#spotifyresults").append(
-                "----------------------------------------------------------------"
-            );
-            $("#spotifyresults").append("<p>Artist Name: " + data.tracks.items[i].artists[i].name+"</p>");
-            $("#spotifyresults").append("<p>Song Title: " + data.tracks.items[i].name+"</p>");
-            $("#spotifyresults").append("<p>Preview Link Here: " + data.tracks.items[i].preview_url+"</p>");
-            $("#spotifyresults").append("<p>Album: " + data.tracks.items[i].album.name+"</p>");
-            $("#spotifyresults").append("<p>Image: " + data.tracks.items[i].album.images[i].url+"</p>");
-            $("#spotifyresults").append(
-                "----------------------------------------------------------------"
-            );
-        }
-        
-        console.log(data.tracks);
+      method: "GET",
+      url: "/api/spotify/" + bandname + "/" + song
+    }).then(function(data) {
+      $("#spotifyresults").empty();
+      for (var i = 0; i < data.tracks.items.length; i++) {
+        $("#spotifyresults").append(" ");
+        $("#spotifyresults").append(
+          "----------------------------------------------------------------"
+        );
+        $("#spotifyresults").append(
+          "<p>Artist Name: " + data.tracks.items[i].artists[i].name + "</p>"
+        );
+        $("#spotifyresults").append(
+          "<p>Song Title: " + data.tracks.items[i].name + "</p>"
+        );
+        $("#spotifyresults").append(
+          "<p>Preview Link Here: " + data.tracks.items[i].preview_url + "</p>"
+        );
+        $("#spotifyresults").append(
+          "<p>Album: " + data.tracks.items[i].album.name + "</p>"
+        );
+        $("#spotifyresults").append(
+          "<p>Image: " + data.tracks.items[i].album.images[i].url + "</p>"
+        );
+        $("#spotifyresults").append(
+          "----------------------------------------------------------------"
+        );
 
-        // window.location.href = "/blog";
+        $("#artist").val(data.tracks.items[i].artists[i].name);
+        $("#song").val(data.tracks.items[i].name);
+      }
+
+      console.log(data.tracks);
+
+      // window.location.href = "/blog";
     });
     //    alert(spotifyData.bandname +" " +spotifyData.song);
+  });
 
-});
-
-
-  $("#reviewbtn").on("click", function () {
-
+  $("#reviewbtn").on("click", function() {
     var review = {
-      title: $("#review-title").val().trim(),
-      genre: $("#genre").val().trim(),
-      artist: $("#artist").val().trim(),
-      song: $("#song").val().trim(),
-      author: $("#author").val().trim(),
-      body: $("#review-body").val().trim()
-    }
+      title: $("#review-title")
+        .val()
+        .trim(),
+      genre: $("#genre")
+        .val()
+        .trim(),
+      artist: $("#artist")
+        .val()
+        .trim(),
+      song: $("#song")
+        .val()
+        .trim(),
+      author: $("#author")
+        .val()
+        .trim(),
+      body: $("#review-body")
+        .val()
+        .trim()
+    };
 
-    //alert(review.title +" "+  review.genre +" "+ review.body);    
-    $.post("/api/reviews", review, function (data) {
-      //window.location.href = "/blog";
-    });
+    //alert(review.title +" "+  review.genre +" "+ review.body);
+    $.post("/api/reviews", review, function(data) {
+      window.location.href = "/blog";
 
 
-     $("#review-title").val(""); 
-     $("#genre").val(""); 
-    $("#artist").val(""); 
-      $("#song").val(""); 
-    $("#author").val(""); 
-     $("#review-body").val(""); 
+    $("#review-title").val("");
+    $("#genre").val("");
+    $("#artist").val("");
+    $("#song").val("");
+    $("#author").val("");
+    $("#review-body").val("");
   });
 
   // Click events for edit and delete buttons
@@ -83,7 +103,7 @@ $(document).ready(function () {
     if (genreString) {
       genreString = "/genre/" + genreString;
     }
-    $.get("/api/reviews" + genreString, function (data) {
+    $.get("/api/reviews" + genreString, function(data) {
       console.log("Reviews", data);
       reviews = data;
       initializeRows();
@@ -95,7 +115,7 @@ $(document).ready(function () {
     $.ajax({
       method: "DELETE",
       url: "/api/reviews/" + id
-    }).then(function () {
+    }).then(function() {
       getReviews();
     });
   }
