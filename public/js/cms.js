@@ -1,3 +1,4 @@
+// Javascript for main post functionality
 $(document).ready(function() {
   // Building jQuery refrences to all elements on our form requiring data input.
   var artistName = $("#artist-name");

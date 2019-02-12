@@ -1,3 +1,4 @@
+// Main js for blog display/update/delete functions
 $(document).ready(function() {
   // Referencing all our jQuery objects
   var reviewContainer = $("#review-container");
