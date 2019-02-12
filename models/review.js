@@ -24,14 +24,14 @@ module.exports = function(sequelize, DataTypes) {
     // ARTIST is required
     artist: {
       type: DataTypes.STRING,
-      allowNull: false,
+      alowNull: false,
       len: [1]
     },
 
     // SONG is required
     song: {
       type: DataTypes.STRING,
-      allowNull: false,
+      alowNull: false,
       len: [1]
     },
 
@@ -43,6 +43,12 @@ module.exports = function(sequelize, DataTypes) {
     },
 
     author: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      len: [1]
+    },
+
+    albumimage: {
       type: DataTypes.STRING,
       allowNull: false,
       len: [1]

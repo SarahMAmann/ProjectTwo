@@ -5,8 +5,9 @@ var express = require("express");
 var db = require("./models");
 
 var app = express();
-var PORT = process.env.PORT || 8080;
 
+var PORT = process.env.PORT || 3000;
+ 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -24,7 +25,7 @@ app.use(express.static("public"));
 // Routes
 require("./controllers/htmlRoutes")(app);
 require("./controllers/review-api-routes")(app);
-
+ 
 var syncOptions = { force: false };
 
 // If running a test, set syncOptions.force to true

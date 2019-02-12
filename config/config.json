@@ -5,6 +5,7 @@
     "database": "bands_overload",
     "host": "localhost",
     "dialect": "mysql"
+
   },
   "test": {
     "username": "root",
