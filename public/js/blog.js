@@ -130,18 +130,23 @@ $(document).ready(function() {
     // // Create its main blog image DIV
     var newReviewCardImgCard = $("<div>");
     newReviewCardImgCard.addClass("card-image");
-
+    // Attributing img file into object
     var newReviewCardPhoto = $("<img>");
     newReviewCardPhoto.attr("src", review.albumimage);
-
     // // Create its heading SPAN & assigning its value
     var newReviewCardHeading = $("<span>");
     newReviewCardHeading.addClass("card-title");
     newReviewCardHeading.text(review.title);
-
+    // Create the photo & heading part of the CARD
     newReviewCardImgCard.append(newReviewCardPhoto);
     newReviewCardImgCard.append(newReviewCardHeading);
-
+    // Creating edit and delete buttons
+    var editButton = $("<button>");
+    editButton.text("EDIT");
+    editButton.addClass("edit btn btn-default");
+    var deleteButton = $("<button>");
+    deleteButton.text("x");
+    deleteButton.addClass("delete btn btn-danger");
     // // Create the main review body DIV
     var newReviewCardBody = $("<div>");
     newReviewCardBody.addClass("card-content");
@@ -161,6 +166,8 @@ $(document).ready(function() {
     newReviewCardBody.append(newReviewArtistAndSongTitle);
     newReviewCardBody.append(newReviewBody);
     newReviewCardBody.append(newReviewGenreAndAuthor);
+    newReviewCardBody.append(editButton);
+    newReviewCardBody.append(deleteButton);
     // // Append everything needed for the entire newReviewCard DIV to display.
     newReviewCard.append(newReviewCardImgCard);
     newReviewCard.append(newReviewCardBody);
