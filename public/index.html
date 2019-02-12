@@ -48,9 +48,6 @@
                     </ul>
                 </div>
             </div>
-
-            <!-- <button id="logout-btn" href="#" onclick="logout()">Logout</button> -->
-
         </nav>
     </div>
     <ul class="side-nav" id="mobile-nav">
@@ -66,6 +63,13 @@
         <li>
             <a href="/cms">Post A Review</a>
         </li>
+        <li>
+            <fb:login-button id="login-btn" scope="public_profile,email" onlogin="checkLoginState();">
+            </fb:login-button>
+        </li>
+        <li>
+            <a id="logout-btn" href="#" onclick="logout()">Logout</a>
+        </li>
     </ul>
 
     <!-- Section: Slider -->
@@ -74,7 +78,8 @@
             <li>
                 <img src="/img/slider1.jpg" alt="">
                 <div class="caption center-align">
-                    <h1>Bands Overload - Discover & Share New Music!</h1>
+                    <h1>Bands Overload</h1>
+                    <h1>Discover & Share New Music!</h1>
                 </div>
             </li>
             <li>
@@ -105,7 +110,7 @@
         </ul>
     </section>
     <!-- Section: Spotitfy and Blog-->
-    <section id="blog" class="section section-blog black-lighten-3">
+    <section id="blog" class="section section-blog black lighten-3">
         <div class="container">
             <div class="row">
                 <h4 class="center"><span class="teal-text">Latest Blog</span></h4>
@@ -194,12 +199,12 @@
                                 <!--INPUT Review Song-->
                                 <div class="form-group col-md-6">
                                     <label for="genre">Song:</label>
-                                    <input placeholder="Ex: pop, metal, jazz, etc." type="text" class="form-control" id="song">
+                                    <input placeholder="Ex: 'Wish you were here'" type="text" class="form-control" id="song">
                                 </div>
                                 <!--INPUT Review Author-->
                                 <div class="form-group col-md-6">
                                     <label for="genre">Author:</label>
-                                    <input placeholder="Ex: pop, metal, jazz, etc." type="text" class="form-control" id="author">
+                                    <input placeholder="Ex: your name here" type="text" class="form-control" id="author">
                                 </div>
                             </div>
                             <!--INPUT Image for your Blog Review-->
@@ -248,7 +253,7 @@
     </section>
     <!-- End of divider-->
     <!-- Section: Music Reviews-->
-    <section class="section section-popular">
+    <section class="section section-popular black lighten-2">
 
         <!--The following are blog post placeholders to bulk up our content.-->
         <div class="container">
