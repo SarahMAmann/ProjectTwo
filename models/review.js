@@ -44,7 +44,13 @@ module.exports = function(sequelize, DataTypes) {
 
     author: {
       type: DataTypes.STRING,
-      alowNull: false,
+      allowNull: false,
+      len: [1]
+    },
+
+    albumimage: {
+      type: DataTypes.STRING,
+      allowNull: false,
       len: [1]
     }
   });

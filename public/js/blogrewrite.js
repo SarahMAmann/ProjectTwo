@@ -11,11 +11,6 @@ $(document).ready(function() {
   var spotifySongTitle = $("#song-title");
   var spotifyResults = $("#spotifyresults");
 
-  // Future SPOTIFY global variables that just need to be declared for now.
-  var spotifyPreviewURL;
-  var spotifyAlbumName;
-  var spotifyAlbumImage;
-
   // POST-A-REVIEW value input fields
   var reviewTitle = $("#review-title");
   var genreInput = $("#genre");
@@ -23,6 +18,7 @@ $(document).ready(function() {
   var songTitle = $("#song");
   var reviewAuthor = $("#author");
   var reviewBody = $("#review-body");
+  var imgUrlInput = $("#image-url");
 
   //==============================================================================
 
@@ -46,12 +42,7 @@ $(document).ready(function() {
         // so you don't have to retype it again.
         artistInput.val(data.tracks.items[i].artists[i].name);
         songTitle.val(data.tracks.items[i].name);
-
-        // Save these values into the previously declared global variables
-        // to be used in later functions.
-        spotifyPreviewURL = data.tracks.items[i].preview_url;
-        spotifyAlbumName = data.tracks.items[i].album.name;
-        spotifyAlbumImage = data.tracks.items[i].album.images[i].url;
+        imgUrlInput.val(data.tracks.items[i].album.images[i].url);
       }
       console.log(data.tracks);
     });
@@ -67,7 +58,8 @@ $(document).ready(function() {
       artist: artistInput.val().trim(),
       song: songTitle.val().trim(),
       author: reviewAuthor.val().trim(),
-      body: reviewBody.val().trim()
+      body: reviewBody.val().trim(),
+      albumimage: imgUrlInput.val().trim()
     };
 
     // Post newReview into database.
@@ -82,113 +74,119 @@ $(document).ready(function() {
       songTitle.val("");
       reviewAuthor.val("");
       reviewBody.val("");
+      imgUrlInput.val("");
     });
-
-    // Click events for edit and delete buttons
-    $(document).on("click", "button.delete-review ", handleReviewDelete);
-    $(document).on("click", "button.edit-button", handleReviewEdit);
-
-    // Creating reviews object
-    var reviews;
-
-    // This function grabs reviews from the database and updates the review
-    function getReviews(genre) {
-      var genreString = genre || "";
-      if (genreString) {
-        genreString = "/genre/" + genreString;
-      }
-      $.get("/api/reviews" + genreString, function(data) {
-        console.log("Reviews", data);
-        reviews = data;
-        initializeRows();
-      });
-    }
-
-    // This function calls API to delete reviews
-    function deleteReview(id) {
-      $.ajax({
-        method: "DELETE",
-        url: "/api/reviews/" + id
-      }).then(function() {
-        getReviews();
-      });
-    }
-
-    // Function that appends all of constructed review HTML inside reviewContainer
-    function initializeRows() {
-      reviewContainer.empty();
-      for (var i = 0; i < reviews.length; i++) {
-        createNewRow(reviews[i]);
-      }
-    }
-
-    // Function that constructs the review HTML!
-    function createNewRow(review) {
-      // Create new card object DIV
-      // !!!! The main object being displayed !!!!!
-      var newReviewRow = $("<div>");
-      newReviewRow.addClass("col s12 m4");
-
-      // create the newReviewCard DIV
-      var newReviewCard = $("<div>");
-      newReviewCard.addClass("card");
-      newReviewCard.html("<p>This works</p>");
-    //   // Create its main blog image DIV
-    //   var newReviewCardImg = $("<div>");
-    //   newReviewCardImg.addClass("card-image");
-    //   newReviewCardImg.html("<img src='" + spotifyAlbumImage + "'");
-    //   // Create its heading SPAN & assigning its value
-    //   var newReviewCardHeading = $("<span>");
-    //   newReviewCardHeading.addClass("card-title");
-    //   newReviewCardHeading.text(review.title + " ");
-    //   // Create the main review body DIV
-    //   var newReviewCardBody = $("<div>");
-    //   newReviewCardBody.addClass("card-content");
-    //   // Create the objects for review song/artist/genre/author
-    //   var newReviewArtistAndSongTitle = $("<h4>");
-    //   var newReviewGenre = "<h5>";
-    //   var newReviewAuthor = $("<small>");
-    //   newReviewArtistAndSongTitle.text(
-    //     "Review for: " + review.song + " | " + "by " + review.artist
-    //   );
-    //   newReviewGenre.text(review.genre);
-    //   newReviewAuthor.text("Written by: " + review.author);
-    //   // Create the review body object to pass into DIV
-    //   var newReviewBody = $("<p>");
-    //   newReviewBody.text(review.body);
-    //   // Append everything needed for newReviewCardBody card-content
-    //   newReviewCardBody.append(newReviewArtistAndSongTitle);
-    //   newReviewCardBody.append(newReviewArtistAndSongTitle);
-    //   newReviewCardBody.append(newReviewBody);
-    //   newReviewCardBody.append(newReviewAuthor);
-    //   // Append everything needed for the entire newReviewCard DIV to display.
-    //   newReviewCard.append(newReviewCardImg);
-    //   newReviewCard.append(newReviewCardHeading);
-    //   newReviewCard.append(newReviewCardBody);
-    //   newReviewCard.data("review", review);
-      newReviewRow.append(newReviewCard);
-    //   // Return newReviewRow into the reviewContainer DIV;
-      reviewContainer.prepend(newReviewRow);
-    }
-
-    // Function that finds out which review to delete and calls deleteReview
-    function handleReviewDelete() {
-      var currentReview = $(this)
-        .parent()
-        .parent()
-        .data("review");
-      deleteReview(currentReview.id);
-    }
-
-    function handleReviewEdit() {
-      var currentReview = $(this)
-        .parent()
-        .parent()
-        .data("review");
-      window.location.href = "/cms?review_id=" + currentReview.id;
-    }
-
-    // Getting the initial list of reviews
-    getReviews();
   });
+
+  // This function grabs reviews from the database and updates the review
+  function getReviews(genre) {
+    var genreString = genre || "";
+    if (genreString) {
+      genreString = "/genre/" + genreString;
+    }
+    $.get("/api/reviews" + genreString, function(data) {
+      console.log("Reviews", data);
+      reviews = data;
+      initializeRows();
+    });
+  }
+
+  // Click events for edit and delete buttons
+  $(document).on("click", "button.delete-review ", handleReviewDelete);
+  $(document).on("click", "button.edit-button", handleReviewEdit);
+
+  // Creating reviews object
+  var reviews;
+
+  // This function calls API to delete reviews
+  function deleteReview(id) {
+    $.ajax({
+      method: "DELETE",
+      url: "/api/reviews/" + id
+    }).then(function() {
+      getReviews();
+    });
+  }
+
+  // Function that appends all of constructed review HTML inside reviewContainer
+  function initializeRows() {
+    reviewContainer.empty();
+    // alert(reviews.length);
+    for (var i = 0; i < reviews.length; i++) {
+      createNewRow(reviews[i]);
+    }
+  }
+
+  // Function that constructs the review HTML!
+  function createNewRow(review) {
+    //   alert("This works");
+    // // Create new card object DIV
+    // // !!!! The main object being displayed !!!!!
+    var newReviewRow = $("<div>");
+    newReviewRow.addClass("col s12 m4");
+    // // create the newReviewCard DIV
+    var newReviewCard = $("<div>");
+    newReviewCard.addClass("card");
+    // // Create its main blog image DIV
+    var newReviewCardImgCard = $("<div>");
+    newReviewCardImgCard.addClass("card-image");
+
+    var newReviewCardPhoto = $("<img>");
+    newReviewCardPhoto.attr("src", review.albumimage);
+
+    // // Create its heading SPAN & assigning its value
+    var newReviewCardHeading = $("<span>");
+    newReviewCardHeading.addClass("card-title");
+    newReviewCardHeading.text(review.title);
+
+    newReviewCardImgCard.append(newReviewCardPhoto);
+    newReviewCardImgCard.append(newReviewCardHeading);
+
+    // // Create the main review body DIV
+    var newReviewCardBody = $("<div>");
+    newReviewCardBody.addClass("card-content");
+    // // Create the objects for review song/artist/genre/author
+    var newReviewArtistAndSongTitle = $("<h5>");
+    var newReviewGenreAndAuthor = $("<small>");
+    newReviewGenreAndAuthor.html(
+      "in " + review.genre + " | written by: " + review.author
+    );
+    newReviewArtistAndSongTitle.html(
+      "Review for: " + review.song + " <br>by " + review.artist
+    );
+    // // Create the review body object to pass into DIV
+    var newReviewBody = $("<p>");
+    newReviewBody.text(review.body);
+    // // Append everything needed for newReviewCardBody card-content
+    newReviewCardBody.append(newReviewArtistAndSongTitle);
+    newReviewCardBody.append(newReviewBody);
+    newReviewCardBody.append(newReviewGenreAndAuthor);
+    // // Append everything needed for the entire newReviewCard DIV to display.
+    newReviewCard.append(newReviewCardImgCard);
+    newReviewCard.append(newReviewCardBody);
+    newReviewCard.data("review", review);
+    newReviewRow.append(newReviewCard);
+    // //   // Return newReviewRow into the reviewContainer DIV;
+    reviewContainer.prepend(newReviewRow);
+  }
+
+  // Function that finds out which review to delete and calls deleteReview
+  function handleReviewDelete() {
+    var currentReview = $(this)
+      .parent()
+      .parent()
+      .data("review");
+    deleteReview(currentReview.id);
+  }
+
+  function handleReviewEdit() {
+    var currentReview = $(this)
+      .parent()
+      .parent()
+      .data("review");
+    window.location.href = "/cms?review_id=" + currentReview.id;
+  }
+
+  // Getting the initial list of reviews
+  getReviews();
 });
